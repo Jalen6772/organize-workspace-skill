@@ -1,0 +1,22 @@
+{
+  "example_only": true,
+  "scope": "Fictional workspace; recompute paths and hashes before any real operation",
+  "operations": [
+    {
+      "source_relative_path": "02_公司乙/宣传/甲认证.md",
+      "target_relative_path": "01_公司甲/运营推广/账号与渠道/甲认证.md",
+      "reason": "认证材料属于公司甲",
+      "evidence": "正文说明主体为公司甲，用于官方账号认证",
+      "operation_type": "move",
+      "status": "planned"
+    },
+    {
+      "source_relative_path": "02_公司乙/宣传/商务沟通.md",
+      "target_relative_path": "02_公司乙/业务资料/商务沟通.md",
+      "reason": "公司乙作为服务方管理商务沟通",
+      "evidence": "正文说明公司乙与客户协商报价和交付范围",
+      "operation_type": "move",
+      "status": "planned"
+    }
+  ]
+}
