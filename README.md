@@ -4,7 +4,7 @@
 
 An instruction-based Agent Skill for content-aware workspace organization, with synthetic evaluation fixtures. Chinese-first documentation.
 
-**版本：1.1.0 · 初版（Experimental）· MIT**
+**版本：1.1.1 · 实验版（Experimental）· MIT** · [更新记录](CHANGELOG.md)
 
 ## 适合处理什么
 
@@ -75,5 +75,7 @@ python3 tools/build_release.py
 ## 来源与许可
 
 本项目将实际目录整理中的通用方法整理成独立技能，内容与测试材料由维护者使用 AI 辅助编写。示例主体和数据均为虚构，不包含真实客户文件或原始执行日志。
+
+维护者：Jalen（GitHub：[Jalen6772](https://github.com/Jalen6772)），宁夏至远益信科贸有限公司。逐版变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 采用 [MIT 许可证](LICENSE)，允许在保留许可声明的条件下使用、修改和分发。技能效果取决于执行环境，未承诺自动恢复、零误分类或全平台兼容。

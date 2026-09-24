@@ -13,7 +13,7 @@ SKILL_FILES = (
     "organize-workspace/references/reuse.md",
 )
 PUBLIC_FILES = (
-    ".gitignore", "README.md", "LICENSE", *SKILL_FILES,
+    ".gitignore", "README.md", "CHANGELOG.md", "LICENSE", *SKILL_FILES,
     "examples/move-plan.json", "tests/README.md", "tests/RESULTS.md", "tests/results-2026-09-14.json",
     "tests/fixture.py", "tests/verify_fixture.py", "tests/check_harness.py", "tools/build_release.py",
 )
