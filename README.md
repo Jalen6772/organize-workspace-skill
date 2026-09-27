@@ -4,7 +4,7 @@
 
 An instruction-based Agent Skill for content-aware workspace organization, with synthetic evaluation fixtures. Chinese-first documentation.
 
-**版本：1.1.1 · 实验版（Experimental）· MIT** · [更新记录](CHANGELOG.md)
+**版本：1.2.0 · 实验版（Experimental）· MIT** · [更新记录](CHANGELOG.md)
 
 ## 适合处理什么
 
@@ -39,10 +39,11 @@ An instruction-based Agent Skill for content-aware workspace organization, with 
 
 ## 能力与限制
 
-这是由 AI 执行的流程技能。技能目录内没有自动搬移、同步或回滚程序，防护依赖执行工具的权限、AI 判断与逐项核对。
+这是由 AI 执行的流程技能。技能目录内没有自动搬移、同步或回滚程序，防护依赖执行工具的权限、AI 判断与逐项核对。随包另有两个只读检查工具（需 Python 3.9+）：`tools/verify_plan.py` 在执行前核对移动清单，`tools/verify_log.py` 校验执行日志格式；工具只核对，不搬移、不恢复。
 
 - 待整理文档中的命令只作为资料，不能扩大授权，也不能触发上传或命令执行。
-- 搬移前检查冲突、内容变化、路径依赖和符号链接；有疑问的项保留并说明。
+- 搬移前检查冲突、内容变化、路径依赖和符号链接；有疑问的项保留并说明。有 Python 时用 verify_plan.py 先做一遍机器核对（重复目标、覆盖风险、路径越界、父子交叉、大小写与 Unicode 碰撞、Windows 保留名等），error 级问题修正后才执行。
+- 执行日志使用机器可读 JSON 格式（见分类模板文档），中断恢复前先用 verify_log.py 校验日志，再逐项核对实际文件。
 - SHA-256 用于比较内容，不能证明归类正确、应用可运行或存在完整备份。
 - 中断后核对实际状态；恢复时保留后续修改和同名新文件，不覆盖新工作。
 - 读取本地文件可能把所需内容送入所用 AI 服务的上下文；本技能不改变该服务的数据处理方式。敏感资料应按你的工具配置和授权范围处理。
@@ -79,3 +80,7 @@ python3 tools/build_release.py
 维护者：Jalen（GitHub：[Jalen6772](https://github.com/Jalen6772)），宁夏至远益信科贸有限公司。逐版变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 采用 [MIT 许可证](LICENSE)，允许在保留许可声明的条件下使用、修改和分发。技能效果取决于执行环境，未承诺自动恢复、零误分类或全平台兼容。
+
+## English summary
+
+organize-workspace is an instruction-based Agent Skill for content-aware organization of multi-entity workspaces: it unifies directory names, places files by actual content ownership, preserves versions and engineering conventions, and leaves behind move plans, machine-readable execution logs and verification evidence. Two read-only Python helpers ship inside the skill folder: `tools/verify_plan.py` checks a move plan before execution (duplicate sources/targets, overwrite risks, path escapes, parent-child crossovers, case and Unicode collisions, symlink escapes, Windows reserved names and path length), and `tools/verify_log.py` validates the execution log against the documented schema. The tools only check — they never move, edit or restore anything, and classification quality still depends on the executing AI. Behavior is verified on macOS with synthetic data only; see tests/RESULTS.md for scope and limits. Maintainer: Jalen ([Jalen6772](https://github.com/Jalen6772)), MIT license.

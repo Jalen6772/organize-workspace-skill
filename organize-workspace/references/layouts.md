@@ -78,6 +78,27 @@
 
 ## 移动清单与验收记录
 
-移动清单至少包含：source_relative_path、target_relative_path、reason、evidence、operation_type、status。父子移动再记录执行顺序；目标已存在时记录冲突而不是覆盖。
+移动清单至少包含：source_relative_path、target_relative_path、reason、evidence、operation_type、status。父子移动再记录执行顺序；目标已存在时记录冲突而不是覆盖。定稿后可用 `tools/verify_plan.py` 做只读核对（用法见 SKILL.md 执行流程第 2 步）。
 
 校验记录至少包含：旧新位置、文件数、大小、适用的哈希、文档更新及备份、引用检查、工程状态检查、未验证项。将历史快照、当前资料和并行变化分开记录。
+
+## 执行日志格式
+
+执行日志是机器可读的 JSON 文件，中断后依据它恢复进度；`tools/verify_log.py` 按以下规则校验：
+
+```json
+{
+  "version": 1,
+  "batch": "2026-09-24-01",
+  "entries": [
+    {"seq": 1, "operation": "move", "source_relative_path": "98_收件箱/付款.csv",
+     "target_relative_path": "04_业务与财务/财务资料/付款.csv",
+     "status": "done", "sha256_before": "64位十六进制SHA-256", "detail": ""}
+  ]
+}
+```
+
+- `operation` 取 move、mkdir、edit、link；`status` 取 done、failed、skipped、deferred。
+- move 与 edit 的 done 项必须带操作前内容的 sha256_before；mkdir 与 link 可省略。
+- 同一目标只允许一个 done 项；move 的来源与目标不得相同。
+- failed、skipped、deferred 项应在 detail 说明原因；提供 `--plan` 时，done 项必须能在移动清单中找到对应操作。

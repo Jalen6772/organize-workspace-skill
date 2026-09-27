@@ -11,11 +11,14 @@ SKILL_FILES = (
     "organize-workspace/agents/openai.yaml",
     "organize-workspace/references/layouts.md",
     "organize-workspace/references/reuse.md",
+    "organize-workspace/tools/verify_plan.py",
+    "organize-workspace/tools/verify_log.py",
 )
 PUBLIC_FILES = (
     ".gitignore", "README.md", "CHANGELOG.md", "LICENSE", *SKILL_FILES,
     "examples/move-plan.json", "tests/README.md", "tests/RESULTS.md", "tests/results-2026-09-14.json",
-    "tests/fixture.py", "tests/verify_fixture.py", "tests/check_harness.py", "tools/build_release.py",
+    "tests/fixture.py", "tests/verify_fixture.py", "tests/check_harness.py", "tests/test_verify_plan.py",
+    "tools/build_release.py",
 )
 
 
